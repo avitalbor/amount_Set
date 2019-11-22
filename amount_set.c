@@ -104,6 +104,7 @@ AmountSetResult asRegister(AmountSet set, ASElement element){
     }
     newContainer->quantity=0;
     newContainer->element=element;
+    set->size_of_Set=set->size_of_Set+1;
     if(!(set->amountSetContainer->nextContainer)){
         set->amountSetContainer->nextContainer=newContainer;
         return  AS_SUCCESS;
@@ -130,6 +131,7 @@ AmountSetResult asDelete(AmountSet set, ASElement element){
     if(!asContains(set,element)){
         AS_ITEM_DOES_NOT_EXIST;
     }
+
     Set_Container tmp1= set->amountSetContainer;
     Set_Container tmp2= set->amountSetContainer;
 
@@ -141,6 +143,7 @@ AmountSetResult asDelete(AmountSet set, ASElement element){
     set->freeAsElement(tmp1->nextContainer->element);
     free(tmp1->nextContainer);
     tmp1->nextContainer=tmp2;
+    set->size_of_Set=set->size_of_Set-1;
     return AS_SUCCESS;
 }
 
